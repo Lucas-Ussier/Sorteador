@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>bingo</h1>
+        </header>
+        
+        <p>Coloque o número inicial e o número final para poder fazer o sorteio, e boa sorte!</p>
+        <label for="inicio">Número Inicial: </label>
+        <input class="textInput" type="number" name="inicio" id="inicio" value="1">
+
+        <label for="fim">Número Final: </label>
+        <input class="textInput" type="number" name="fim" id="fim" value="75">
+        <input class="botao" type="button" value="Sortear" onclick="sortear()">
+        <div class="show" id="resultado"></div>
+        <table>
+            <thead>
+                <tr>                       
+                    <th>B</th>
+                    <th>I</th>
+                    <th>N</th>
+                    <th>G</th>
+                    <th>O</th>
+                </tr>               
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="B"></td>
+                    <td id="I"></td>                        
+                    <td id="N"></td>
+                    <td id="G"></td>
+                    <td id="O"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <input class="botao" type="button" value="BINGO!" onclick="limpar()">
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

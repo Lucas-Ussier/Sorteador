@@ -6,6 +6,11 @@
     --background-color: #ccc;
     --light-font-color: #000;
     --dark-font-color: #fff;
+    
+
+    --font-size: 1em;
+    --result-font-size: 2em;
+    --big-font-size: 3em;
 }
 
 *{
@@ -24,7 +29,7 @@ table {
     border-collapse: collapse;
     margin: 20px auto;
     font-weight: bold;
-    font-size: 1.4em;
+    font-size: var(--font-size)
 }
 th, td {
     border: 5px solid var(--primary-color);
@@ -46,7 +51,7 @@ header{
 
 h1{
     color: var(--dark-font-color);
-    font-size: 3em;
+    font-size: var(--big-font-size);
     padding: 20px;
     text-transform: uppercase;
     font-weight: bold;
@@ -54,19 +59,19 @@ h1{
 }
 
 p{
-    font-size: 1.2em;
+    font-size: var(--font-size);
     margin-bottom: 20px;
 }
 
 
 label{
-    font-size: 1.2em;
+    font-size: var(--font-size);
     margin-right: 10px;
 }
 
 #resultado{
     width: fit-content;
-    font-size: 2em;
+    font-size: var(--result-font-size);
     font-weight: bold;
     background-color: var(--primary-color);
     color: var(--dark-font-color);
@@ -86,7 +91,7 @@ label{
     margin-right: 10px;
     width: 100px;
     text-align: center;
-    font-size: 1.4em;
+    font-size: var(--font-size);
 }
 
 .botao{
@@ -94,12 +99,12 @@ label{
     margin: 20px auto;
     padding: 10px 20px;
     background-color: var(--primary-color);
-    color: #fff;
+    color: var(--secondary-color);
     border: none;
     border-radius: 7px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.2em;
+    font-size: var(--font-size);
 }
 

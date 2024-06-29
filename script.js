@@ -31,8 +31,11 @@ function sortear() {
     if (!numbers.includes(numero)) {
         numbers.push(numero)
         resultado.classList.remove('show')
-        resultado.innerHTML = `Número Sorteado: ${getBingoCategory(numero)} - ${numero}`
-        adicionarNaTabela(numero)
+        resultado.innerHTML = `Número Sorteado: ${getBingoCategory(numero)}`
+        setTimeout(() => {
+            resultado.innerHTML += ` - ${numero}`
+            adicionarNaTabela(numero)
+        }, 1000);
     }else{
         sortear()
     }

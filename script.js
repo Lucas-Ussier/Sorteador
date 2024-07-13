@@ -79,6 +79,14 @@ function getBingoCategory(number) {
     }
 }
 
+function confirmar(){
+    let con = confirm("Deseja recolocar as pedras de volta no globo?")
+
+    if (con){
+        limpar()
+    }
+}
+
 function limpar() {
     const b = document.querySelector('#B')
     const i = document.querySelector('#I')

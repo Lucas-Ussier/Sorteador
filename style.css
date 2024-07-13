@@ -108,3 +108,16 @@ label{
     font-size: var(--font-size);
 }
 
+.botao-container{
+    display: inline;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: var(--font-size);
+}
+

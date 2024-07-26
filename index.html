@@ -11,6 +11,19 @@
         <header>
             <h1>bingo</h1>
         </header>
+
+        <div class="pedraMaior">
+            <div class="container">
+                <label for="pedra">Pedra Maior: </label>
+                    <input class="textInput" type="number" name="pedra" id="pedra" value="2">
+                <div class="result">
+                </div>
+                <div>
+                    <input class="botao-container" type="button" value="Sortear" onclick="sortearPedraMaior()">
+                    <input class="botao-container" type="button" value="Finalizar" onclick="finalizarPedraMaior()">
+                </div>
+            </div>
+        </div>
         
         <p>Coloque o número inicial e o número final para poder fazer o sorteio, e boa sorte!</p>
         <label for="inicio">Número Inicial: </label>
@@ -43,7 +56,7 @@
 
         <div>
             <input class="botao-container" type="button" value="BINGO!" onclick="confirmar()">
-            <input class="botao-container" type="button" value="Pedra Maior" onclick="pedra-maior()">
+            <input class="botao-container" type="button" value="Pedra Maior" onclick="mostrarPedraMaior()">
         </div>
     </main>
 

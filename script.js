@@ -1,5 +1,6 @@
 
 let numbers = []
+let pedraMaior = []
 
 window.onload = () => {
     limpar()
@@ -10,11 +11,7 @@ function sortear() {
     const fim = Number(document.querySelector('#fim').value)
 
     const resultado = document.querySelector('#resultado')
-    const b = document.querySelector('#b')
-    const i = document.querySelector('#i')
-    const n = document.querySelector('#n')
-    const g = document.querySelector('#g')
-    const o = document.querySelector('#o')
+    let numero = gerarNumeroAleatorio(inicio, fim)
 
     if (inicio == '' || fim == '') {
         alert('[ERRO] Faltam dados!')
@@ -25,8 +22,6 @@ function sortear() {
         alert('[ERRO] O valor inicial deve ser menor que o valor final!')
         return
     }
-    
-    let numero = gerarNumeroAleatorio(inicio, fim)
 
     if (!numbers.includes(numero)) {
         numbers.push(numero)
@@ -40,8 +35,6 @@ function sortear() {
         sortear()
     }
     console.log("NUMERO:",numero, numbers)
-
-
 }
 
 function gerarNumeroAleatorio(inicio, fim){
@@ -53,12 +46,8 @@ function adicionarNaTabela(number) {
     console.log(category);
     if (category !== 'Invalid') {
         const columnElement = document.getElementById(category);
-        
-        // Criar um novo elemento div para o número
         const numberElement = document.createElement('div');
         numberElement.textContent = number;
-        
-        // Adicionar o novo elemento div ao respectivo coluna
         columnElement.appendChild(numberElement);
     }
 }
@@ -81,26 +70,65 @@ function getBingoCategory(number) {
 
 function confirmar(){
     let con = confirm("Deseja recolocar as pedras de volta no globo?")
-
     if (con){
         limpar()
     }
 }
 
 function limpar() {
-    const b = document.querySelector('#B')
-    const i = document.querySelector('#I')
-    const n = document.querySelector('#N')
-    const g = document.querySelector('#G')
-    const o = document.querySelector('#O')
-    const resultado = document.querySelector('#resultado')
-    resultado.classList.add('show')
-    b.innerHTML = ''
-    i.innerHTML = ''
-    n.innerHTML = ''
-    g.innerHTML = ''
-    o.innerHTML = ''
-    numbers = []
-    resultado.innerHTML = ''
+  const columns = ['B', 'I', 'N', 'G', 'O'];
+  const result = document.querySelector('#resultado');
+
+  columns.forEach(column => {
+    const columnElement = document.getElementById(column);
+    columnElement.innerHTML = '';
+  });
+
+  result.classList.add('show');
+  result.innerHTML = '';
+}
+
+function mostrarPedraMaior(){
+    document.querySelector('.pedraMaior').style.display = 'block'
+}
+
+function sortearPedraMaior(){
+    const pedra = document.querySelector('#pedra').value
+    const resultado = document.querySelector('.result')
+    var timer = 1000
+    let i = 0
+
+    if (pedra.value == '') {
+        alert('[ERRO] Faltam dados!')
+        return
+    }
+    
+    if (pedraMaior.length > 0) {
+        resultado.innerHTML = ''
+        pedraMaior = []
+    }
+
+    for (let index = 0; index < pedra; index++) {
+        const number = gerarNumeroAleatorio(1,50)
+        if (!pedraMaior.includes(number)) {
+            pedraMaior.push(number)
+        }
+    }
+
+    const exibirProximoNumero = () => {
+        if (i < pedraMaior.length) {
+            resultado.innerHTML += ` <p> ${i + 1} - ${pedraMaior[i]} </ br> </p>`
+            i++;
+            setTimeout(exibirProximoNumero, timer);
+        }
+    }
+    exibirProximoNumero()
+}
+
+function finalizarPedraMaior(){
+    document.querySelector('.pedraMaior').style.display = 'none'
+    document.querySelector('.result').innerHTML = ''
+    document.querySelector('#pedra').value = '2'
+    pedraMaior = []
 }
     

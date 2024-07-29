@@ -1,5 +1,10 @@
-
-let numbers = []
+let numbers = {
+    'B': [],
+    'I': [],
+    'N': [],
+    'G': [],
+    'O': []
+}
 let pedraMaior = []
 
 window.onload = () => {
@@ -9,10 +14,8 @@ window.onload = () => {
 function sortear() {
     const inicio = Number(document.querySelector('#inicio').value)
     const fim = Number(document.querySelector('#fim').value)
-
     const resultado = document.querySelector('#resultado')
-    let numero = gerarNumeroAleatorio(inicio, fim)
-
+    
     if (inicio == '' || fim == '') {
         alert('[ERRO] Faltam dados!')
         return
@@ -23,18 +26,36 @@ function sortear() {
         return
     }
 
-    if (!numbers.includes(numero)) {
-        numbers.push(numero)
-        resultado.classList.remove('show')
-        resultado.innerHTML = `Número Sorteado: ${getBingoCategory(numero)}`
-        setTimeout(() => {
-            resultado.innerHTML += ` - ${numero}`
-            adicionarNaTabela(numero)
-        }, 1000);
-    }else{
-        sortear()
+    const numero = gerarNumeroAleatorio(inicio, fim)
+    const category = getBingoCategory(numero);
+
+    if (category != 'Invalid'){
+        if (!numbers[category].includes(numero)) {
+            numbers[category].push(numero)
+            resultado.classList.remove('show')
+            resultado.innerHTML = `Número Sorteado: ${category}`
+            setTimeout(() => {
+                resultado.innerHTML += ` - ${numero}`
+                adicionarNaTabela(numero)
+                aparecerOrdenarBotao();
+            }, 1000);
+        }else{
+            sortear()
+        }
     }
-    console.log("NUMERO:",numero, numbers)
+}
+
+function shouldShowSortButton() {
+    const categories = ['B', 'I', 'N', 'G', 'O'];
+    console.log(!categories.some(category => numbers[category].length > 2));
+    return !categories.some(category => numbers[category].length > 2);
+}
+
+function aparecerOrdenarBotao() {
+    const sortButton = document.querySelector('.atualizar');
+    if (sortButton) {
+        sortButton.classList.toggle('show', shouldShowSortButton());
+    }
 }
 
 function gerarNumeroAleatorio(inicio, fim){
@@ -43,7 +64,6 @@ function gerarNumeroAleatorio(inicio, fim){
 
 function adicionarNaTabela(number) {
     const category = getBingoCategory(number);
-    console.log(category);
     if (category !== 'Invalid') {
         const columnElement = document.getElementById(category);
         const numberElement = document.createElement('div');
@@ -78,6 +98,15 @@ function confirmar(){
 function limpar() {
   const columns = ['B', 'I', 'N', 'G', 'O'];
   const result = document.querySelector('#resultado');
+  document.querySelector('.atualizar').classList.add('show');
+
+  numbers = {
+    'B': [],
+    'I': [],
+    'N': [],
+    'G': [],
+    'O': []
+  };
 
   columns.forEach(column => {
     const columnElement = document.getElementById(column);
@@ -130,5 +159,19 @@ function finalizarPedraMaior(){
     document.querySelector('.result').innerHTML = ''
     document.querySelector('#pedra').value = '2'
     pedraMaior = []
+}
+
+function ordenar() {
+    const columns = ['B', 'I', 'N', 'G', 'O'];
+
+    columns.forEach(column => {
+        const columnElement = document.getElementById(column);
+        columnElement.innerHTML = '';
+        numbers[column].sort((a, b) => a - b).forEach(number => {
+            const numberElement = document.createElement('div');
+            numberElement.textContent = number;
+            columnElement.appendChild(numberElement);
+        })
+    });
 }
     

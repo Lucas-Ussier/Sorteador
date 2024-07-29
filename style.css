@@ -33,9 +33,13 @@ table {
 }
 th, td {
     border: 5px solid var(--primary-color);
-    padding: 10px;
+    padding: 5px;
     text-align: center;
-    
+
+    & .botao{
+        margin: 1px auto;
+        padding: 5px;
+    }
 }
 
 main{

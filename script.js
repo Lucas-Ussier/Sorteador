@@ -6,15 +6,48 @@ let numbers = {
     'O': []
 }
 let pedraMaior = []
+var canSort = true;
 
+//index
 window.onload = () => {
-    limpar()
+    const dadoSimulator = document.querySelector('#dadoSimulator');
+
+    if(dadoSimulator) {
+        if(!dadoSimulator.classList.contains('disabled')) {
+            dadoSimulator.setAttribute('href', "roladordedados/roladordedados.html");
+        }  
+    } 
+}
+
+function testarTabelaDeBingo(){
+    for (let index = 1; index <= 76; index++) {
+        const category = getBingoCategory(index);
+        adicionarNaTabela(index)
+        if (category != 'Invalid'){
+            if (!numbers[category].includes(index)) {
+                numbers[category].push(index)
+                resultado.classList.remove('show')
+                resultado.innerHTML = `Todos`
+                adicionarNaTabela(index)
+            }else{
+                sortear()
+            }
+        }
+    }
 }
 
 function sortear() {
+    if (numbers.B.length === 15 && numbers.I.length === 15 && numbers.N.length === 15 && numbers.G.length === 15 && numbers.O.length === 15) {
+        alert('Todos os números foram sorteados!')
+        canSort = false;
+        sortearButton.disabled = false;
+    }
     const inicio = Number(document.querySelector('#inicio').value)
     const fim = Number(document.querySelector('#fim').value)
     const resultado = document.querySelector('#resultado')
+    const sortearButton = document.querySelector('#sortearButton');
+
+    sortearButton.disabled = true;
     
     if (inicio == '' || fim == '') {
         alert('[ERRO] Faltam dados!')
@@ -37,24 +70,13 @@ function sortear() {
             setTimeout(() => {
                 resultado.innerHTML += ` - ${numero}`
                 adicionarNaTabela(numero)
-                aparecerOrdenarBotao();
+                sortearButton.disabled = false;
             }, 1000);
         }else{
-            sortear()
+            if (canSort) {
+                sortear()
+            }
         }
-    }
-}
-
-function shouldShowSortButton() {
-    const categories = ['B', 'I', 'N', 'G', 'O'];
-    console.log(!categories.some(category => numbers[category].length > 2));
-    return !categories.some(category => numbers[category].length > 2);
-}
-
-function aparecerOrdenarBotao() {
-    const sortButton = document.querySelector('.atualizar');
-    if (sortButton) {
-        sortButton.classList.toggle('show', shouldShowSortButton());
     }
 }
 
@@ -69,6 +91,7 @@ function adicionarNaTabela(number) {
         const numberElement = document.createElement('div');
         numberElement.textContent = number;
         columnElement.appendChild(numberElement);
+        ordenar();
     }
 }
 function getBingoCategory(number) {
@@ -98,7 +121,6 @@ function confirmar(){
 function limpar() {
   const columns = ['B', 'I', 'N', 'G', 'O'];
   const result = document.querySelector('#resultado');
-  document.querySelector('.atualizar').classList.add('show');
 
   numbers = {
     'B': [],
@@ -146,7 +168,7 @@ function sortearPedraMaior(){
 
     const exibirProximoNumero = () => {
         if (i < pedraMaior.length) {
-            resultado.innerHTML += ` <p> ${i + 1} - ${pedraMaior[i]} </ br> </p>`
+            resultado.innerHTML += ` <p> ${i + 1} - ${pedraMaior[i]}</p>`
             i++;
             setTimeout(exibirProximoNumero, timer);
         }
@@ -173,5 +195,56 @@ function ordenar() {
             columnElement.appendChild(numberElement);
         })
     });
+}
+
+//ROLADOR DE DADOS
+
+function rolarDado(dado) {
+    const quantidade = document.querySelector('#quantidade').value
+    const result = document.querySelector('.result')
+    let total = 0
+    result.innerHTML = ''
+
+    if (quantidade == '' || quantidade == 0 || quantidade < 0) {
+        alert('[ERRO] Coloque uma quantidade de dados para continuar!')
+        return
+    }
+    
+    for (let index = 0; index < quantidade; index++) {
+        const number = gerarNumeroAleatorio(1, dado)
+        total += number
+        criarDado(number)
+    }
+    
+    document.querySelector('.total').textContent = `Total: ${total.toString().padStart(3, '0')}`
+
+}
+
+function criarDado(number){
+    const dado = document.createElement('div')
+    const result = document.querySelector('.result')
+
+    dado.classList.add('dado')
+    dado.classList.add('rolling')
+
+    setDadoStyle(dado)
+
+    setTimeout(() => {
+        dado.classList.remove('rolling')
+        dado.textContent = number.toString().padStart(2, '0');
+    }, 1000);
+
+    result.appendChild(dado)    
+}
+
+function setDadoStyle(dado){
+    dado.style.border = '2px solid #000'
+    dado.style.padding = '10px'
+    dado.style.borderRadius = '10px'
+    dado.style.display = 'inline'
+    dado.style.backgroundColor = 'var(--secondary-color)'
+    dado.style.color = 'var(--dark-font-color)'
+    dado.style.fontSize = 'var(--font-size)'
+    dado.style.margin = '10px'
 }
     

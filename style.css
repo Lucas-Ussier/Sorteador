@@ -3,14 +3,56 @@
 :root{
     --primary-color: #0a002b;
     --secondary-color: #cecbcb;
+    --main-background-color: #a4a4a4;
     --background-color: #ccc;
     --light-font-color: #000;
     --dark-font-color: #fff;
     --modal-background-color: #130ba5;
+    --coming-soon-color: yellow;
 
     --font-size: 1em;
     --result-font-size: 2em;
     --big-font-size: 3em;
+}
+
+a{
+    text-decoration: none;
+    color: var(--dark-font-color);
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--main-background-color);
+    border-radius: 10px;
+
+    & a{
+        margin: 0 20px;
+        position: relative;
+        text-decoration: underline;
+    }
+}
+
+a.disabled {
+    pointer-events: none;
+    color: gray; 
+    cursor: default;
+    text-decoration: none;
+}
+
+.comingSoon {
+    position: absolute;
+    top: 30px;
+    right: -20px;
+    background-color: var(--coming-soon-color);
+    color: var(--light-font-color);
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
 }
 
 *{
@@ -44,6 +86,11 @@ th, td {
 
 main{
     text-align: center;
+    width: 75%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: var(--main-background-color);
+    border-radius: 10px;
 }
 
 header{
@@ -56,10 +103,11 @@ header{
 h1{
     color: var(--dark-font-color);
     font-size: var(--big-font-size);
-    padding: 20px;
+    padding: 10px 20px;
     text-transform: uppercase;
     font-weight: bold;
-    letter-spacing: 7px;
+    letter-spacing: 10px;
+    text-align: center;
 }
 
 p{
@@ -110,6 +158,11 @@ label{
     font-weight: bold;
     text-transform: uppercase;
     font-size: var(--font-size);
+
+    &:disabled{
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
 
 .botao-container{
@@ -166,5 +219,49 @@ label{
         margin: 20px auto;
         font-size: var(--result-font-size);
     }
+}
+
+.campo{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+
+    & .total{
+        text-align: right;
+        display: block;
+        font-weight: bold;
+        font-size: var(--font-size);
+        color: var(--dark-font-color);
+    }
+}
+
+.dado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    color: var(--dark-font-color);
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: var(--result-font-size);
+}
+
+@keyframes rollDice {
+    0% { transform: rotateY(0deg); }
+    20% { transform: rotateY(90deg); }
+    40% { transform: rotateY(180deg); }
+    60% { transform: rotateY(270deg); }
+    80% { transform: rotateY(360deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.rolling {
+    animation: rollDice 1s linear;
 }
 

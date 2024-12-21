@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dado 2D com Animação via Script</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .dice {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: bold;
+            background-color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @keyframes rollDice {
+            0% { transform: rotateY(0deg); }
+            20% { transform: rotateY(90deg); }
+            40% { transform: rotateY(180deg); }
+            60% { transform: rotateY(270deg); }
+            80% { transform: rotateY(360deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .rolling {
+            animation: rollDice 1s linear;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Função que cria o dado e os botões dinamicamente
+        function createDiceGame() {
+            const body = document.body;
+
+            // Cria o elemento do dado
+            const dice = document.createElement('div');
+            dice.className = 'dice';
+            dice.id = 'dice';
+            dice.textContent = '6';
+            body.appendChild(dice);
+
+            // Array com os valores máximos dos dados
+            const diceValues = [4, 6,8, 10, 20, 100];
+
+            // Função para criar um botão
+            function createButton(maxValue) {
+                const button = document.createElement('button');
+                button.textContent = `Dado de ${maxValue}`;
+                button.onclick = () => rollDice(maxValue);
+                body.appendChild(button);
+            }
+
+            // Cria os botões dinamicamente
+            diceValues.forEach(createButton);
+        }
+
+        // Função que simula o rolar do dado
+        function rollDice(maxValue) {
+            const dice = document.getElementById('dice');
+            const randomNumber = Math.floor(Math.random() * maxValue) + 1;
+
+            // Adiciona a classe para a animação de rotação
+            dice.classList.add('rolling');
+
+            // Remove a classe após a animação e define o número sorteado
+            setTimeout(() => {
+                dice.classList.remove('rolling');
+                dice.textContent = randomNumber;
+            }, 1000); // Tempo da animação em milissegundos (1s)
+        }
+
+        // Chama a função para criar o jogo de dados ao carregar a página
+        createDiceGame();
+    </script>
+</body>
+</html>

@@ -100,14 +100,14 @@ header{
     padding: 10px;
 }
 
-h1{
+.h1{
     color: var(--dark-font-color);
     font-size: var(--big-font-size);
     padding: 10px 20px;
+    margin: 0 auto;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 10px;
-    text-align: center;
 }
 
 p{

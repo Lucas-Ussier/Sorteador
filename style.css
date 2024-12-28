@@ -101,8 +101,6 @@ header{
 }
 
 .h1{
-    color: var(--dark-font-color);
-    font-size: var(--big-font-size);
     padding: 10px 20px;
     margin: 0 auto;
     text-transform: uppercase;

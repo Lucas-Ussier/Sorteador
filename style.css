@@ -25,7 +25,6 @@ nav{
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: var(--main-background-color);
     border-radius: 10px;
 
     & a{
@@ -89,7 +88,6 @@ main{
     width: 75%;
     margin: 0 auto;
     padding: 10px;
-    background-color: var(--main-background-color);
     border-radius: 10px;
 }
 
